@@ -1,25 +1,25 @@
 {
-  "name": "gitlab-webhook-handler",
+  "name": "taiga-webhook-handler",
   "version": "1.0.1",
-  "description": "Web handler / middleware for processing GitLab Webhooks",
-  "main": "gitlab-webhook-handler.js",
+  "description": "Web handler / middleware for processing Taiga Webhooks",
+  "main": "taiga-webhook-handler.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/caviler/gitlab-webhook-handler.git"
+    "url": "git+https://mikaoelitiana/taiga-webhook-handler"
   },
   "keywords": [
-    "gitlab",
+    "taiga",
     "webhooks"
   ],
-  "author": "Eric Xu <caviler@gmail.com>",
+  "author": "Mika A.<mikaoelitiana@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/caviler/gitlab-webhook-handler/issues"
+    "url": "https://github.com/mikaoelitiana/taiga-webhook-handler/issues"
   },
-  "homepage": "https://github.com/caviler/gitlab-webhook-handler#readme",
+  "homepage": "https://github.com/mikaoelitiana/taiga-webhook-handler/",
   "dependencies": {
     "bl": "~0.9.4"
   }

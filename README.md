@@ -3,20 +3,20 @@
 [![NPM](https://nodei.co/npm/gitlab-webhook-handler.png?downloads=true&downloadRank=true)](https://nodei.co/npm/gitlab-webhook-handler/)
 [![NPM](https://nodei.co/npm-dl/gitlab-webhook-handler.png?months=6&height=3)](https://nodei.co/npm/gitlab-webhook-handler/)
 
-Modify **[rvagg/github-webhook-handler](https://github.com/rvagg/github-webhook-handler)** to fit Gitlab.
+Modify **[rvagg/github-webhook-handler](https://github.com/rvagg/github-webhook-handler)** to fit Taiga.
 
-GitLab allows you to register **[Webhooks](https://gitlab.com/help/web_hooks/web_hooks)** for your repositories. Each time an event occurs on your repository, whether it be pushing code, filling issues or creating pull requests, the webhook address you register can be configured to be pinged with details.
+Taiga allows you to register **[Webhooks](http://taigaio.github.io/taiga-doc/dist/webhooks.html)** for your projects. Each time an event occurs on your project, whether it be creating user stories, filling issues or updating tasks, the webhook address you register can be configured to be pinged with details.
 
 This library is a small handler (or "middleware" if you must) for Node.js web servers that handles all the logic of receiving and verifying webhook requests from GitHub.
 
 
 ## Example
 
-$ npm install gitlab-webhook-handler
+$ npm install taiga-webhook-handler
 
 ```js
 var http = require('http')
-var createHandler = require('gitlab-webhook-handler')
+var createHandler = require('taiga-webhook-handler')
 var handler = createHandler({ path: '/webhook' })
 
 http.createServer(function (req, res) {
@@ -46,6 +46,3 @@ handler.on('issues', function (event) {
     event.payload.issue.title)
 })
 ```
-
-## 中文使用说明
-**[使用 GitHub / GitLab 的 Webhooks 进行网站自动化部署](http://www.lovelucy.info/auto-deploy-website-by-webhooks-of-github-and-gitlab.html)**
