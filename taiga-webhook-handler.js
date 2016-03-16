@@ -29,10 +29,11 @@ function create (options) {
       callback(err)
     }
 
-    var event = req.headers['x-gitlab-event'];
+    var event = req.headers['x-taiga-webhook-signature'];
 
-    if (!event)
-     return hasError('No X-Gitlab-Event found on request')
+    if (!event) {
+      return hasError('No X-TAIGA-WEBHOOK-SIGNATURE found on request')
+    }
 
    req.pipe(bl(function (err, data) {
     if (err) {
@@ -46,22 +47,32 @@ function create (options) {
     } catch (e) {
       return hasError(e)
     }
-    
-      // console.log(obj);
-      var event = obj.object_kind;
+
+      var event = obj.type;
+
+      // Respond to test
+      if (event === 'test'){
+        res.writeHead(200, { 'content-type': 'application/json' })
+        res.end('{"ok":true}')
+        handler.emit('test', {})
+        return
+      }
 
       // invalid json
-      if (!obj || !obj.repository || !obj.repository.name) {
+      if (!obj || !obj.data || !obj.data.project) {
        return hasError('received invalid data from ' + req.headers['host'] + ', returning 400');
      }
 
-     var repo = obj.repository.name;
+     var project = obj.data.project;
 
      res.writeHead(200, { 'content-type': 'application/json' })
      res.end('{"ok":true}')
 
+     console.log("Event: " + event);
+
      var emitData = {
       event   : event
+      , action  : obj.action
       , payload : obj
       , protocol: req.protocol
       , host    : req.headers['host']
