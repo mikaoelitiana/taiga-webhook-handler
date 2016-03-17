@@ -29,9 +29,9 @@ function create (options) {
       callback(err)
     }
 
-    var event = req.headers['x-taiga-webhook-signature'];
+    var signature = req.headers['x-taiga-webhook-signature'];
 
-    if (!event) {
+    if (!signature) {
       return hasError('No X-TAIGA-WEBHOOK-SIGNATURE found on request')
     }
 
@@ -68,8 +68,6 @@ function create (options) {
      res.writeHead(200, { 'content-type': 'application/json' })
      res.end('{"ok":true}')
 
-     console.log("Event: " + event);
-
      var emitData = {
       event   : event
       , action  : obj.action
@@ -77,6 +75,7 @@ function create (options) {
       , protocol: req.protocol
       , host    : req.headers['host']
       , url     : req.url
+      , signature: signature
     }
 
     handler.emit(event, emitData)
